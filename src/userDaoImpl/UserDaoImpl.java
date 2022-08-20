@@ -1,9 +1,11 @@
-package SQL_Database.userDaoImpl;
-import SQL_Database.AbstractDao.abstractDao;
-import SQL_Database.dao.UserInterface;
-import SQL_Database.entity.Country;
-import SQL_Database.entity.Nationality;
-import SQL_Database.entity.User;
+package userDaoImpl;
+
+import AbstractDao.abstractDao;
+import dao.UserInterface;
+import entity.Country;
+import entity.Nationality;
+import entity.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +28,12 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
         Date begin_date = result.getDate("begin_date");
         Date end_date = result.getDate("end_date");
         String Description = result.getString("job_description");
+        int password = result.getInt("password");
 
-        Nationality nationality = new Nationality(nationality_id,nationalityStr);
-        Country birthplace = new Country(birthPlace_id,birthPlaceStr,null);
+        Nationality nationality = new Nationality(nationality_id, nationalityStr);
+        Country birthplace = new Country(birthPlace_id, birthPlaceStr, null);
 
-        return new User(id, name, surname, phone, email, profileDescription, address, birthdate, nationality, birthplace,header,begin_date,end_date,Description);
+        return new User(id, name, surname, phone, email, profileDescription, address, birthdate, nationality, birthplace, header, begin_date, end_date, Description,password);
     }
 
     @Override
@@ -61,20 +64,20 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
     public boolean updateUser(User u) {
         try (Connection a = connect()) {
             PreparedStatement st = a.prepareStatement("update user set name=?,surname=?,phone=?,email=?,profile_description=?,address=?,birthdate=?,birthplace_id=? , nationality_id = ?, old_company_name = ?, begin_date = ?, end_date = ? , job_description = ? where id = ?");
-            st.setString(1,u.getName());
-            st.setString(2,u.getSurname());
-            st.setString(3,u.getPhone());
-            st.setString(4,u.getEmail());
-            st.setString(5,u.getProfileDescription());
-            st.setString(6,u.getAddress());
-            st.setDate(7,u.getBirthDate());
-            st.setInt(8,u.getBirthPlace().getId());
-            st.setInt(9,u.getNationality().getId());
-            st.setString(10,u.getHeader());
-            st.setDate(11,u.getBegin_date());
-            st.setDate(12,u.getEnd_date());
-            st.setString(13,u.getJob_description());
-            st.setInt(14,u.getId());
+            st.setString(1, u.getName());
+            st.setString(2, u.getSurname());
+            st.setString(3, u.getPhone());
+            st.setString(4, u.getEmail());
+            st.setString(5, u.getProfileDescription());
+            st.setString(6, u.getAddress());
+            st.setDate(7, u.getBirthDate());
+            st.setInt(8, u.getBirthPlace().getId());
+            st.setInt(9, u.getNationality().getId());
+            st.setString(10, u.getHeader());
+            st.setDate(11, u.getBegin_date());
+            st.setDate(12, u.getEnd_date());
+            st.setString(13, u.getJob_description());
+            st.setInt(14, u.getId());
             return st.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -103,7 +106,7 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
                     "   n.nationality_name, " +
                     "   c.name as birthplace " +
                     "   from user u " +
-                    "   left join nationality n on u.nationality_id = n.id "+
+                    "   left join nationality n on u.nationality_id = n.id " +
                     "   left join country c on u.birthplace_id = c.id where u.id = " + userId);
             ResultSet result = st.getResultSet();
             while (result.next()) {
@@ -117,14 +120,15 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
 
     public boolean addUser(User u) {
         try (Connection a = connect()) {
-            PreparedStatement st = a.prepareStatement("insert into user(name,surname,phone,email,profile_description,address,birthdate) values(?,?,?,?,?,?,?)");
+            PreparedStatement st = a.prepareStatement("insert into user(name,surname,phone,email,profile_description,address,birthdate,password) values(?,?,?,?,?,?,?,?)");
             st.setString(1, u.getName());
-            st.setString(2,u.getSurname());
-            st.setString(3,u.getPhone());
-            st.setString(4,u.getEmail());
-            st.setString(5,u.getProfileDescription());
-            st.setString(6,u.getAddress());
-            st.setDate(7,u.getBirthDate());
+            st.setString(2, u.getSurname());
+            st.setString(3, u.getPhone());
+            st.setString(4, u.getEmail());
+            st.setString(5, u.getProfileDescription());
+            st.setString(6, u.getAddress());
+            st.setDate(7, u.getBirthDate());
+            st.setInt(8,u.getPassword());
             return st.execute();
         } catch (Exception ex) {
             ex.printStackTrace();

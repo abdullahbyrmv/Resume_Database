@@ -1,4 +1,5 @@
-package SQL_Database.entity;
+package entity;
+
 import java.sql.Date;
 
 public class EmploymentHistory {
@@ -7,9 +8,9 @@ public class EmploymentHistory {
     private Date begin_date;
     private Date end_date;
     private String job_description;
-    private User user;
+    private entity.User user;
 
-    public EmploymentHistory(Integer id, String header, Date begin_date, Date end_date, String job_description, User user) {
+    public EmploymentHistory(Integer id, String header, Date begin_date, Date end_date, String job_description, entity.User user) {
         this.id = id;
         this.header = header;
         this.begin_date = begin_date;
@@ -58,11 +59,11 @@ public class EmploymentHistory {
         this.job_description = job_description;
     }
 
-    public User getUser() {
+    public entity.User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(entity.User user) {
         this.user = user;
     }
 

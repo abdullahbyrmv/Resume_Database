@@ -1,4 +1,4 @@
-package SQL_Database.entity;
+package entity;
 import java.util.Objects;
 
 public class Country {

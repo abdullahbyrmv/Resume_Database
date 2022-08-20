@@ -1,4 +1,4 @@
-package SQL_Database.Main;
+package Main;
 
 public class DatabaseMain {
 

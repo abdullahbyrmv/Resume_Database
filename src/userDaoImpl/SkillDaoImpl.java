@@ -1,7 +1,11 @@
-package SQL_Database.userDaoImpl;
-import SQL_Database.AbstractDao.abstractDao;
-import SQL_Database.dao.SkillInterface;
-import SQL_Database.entity.Skill;
+package userDaoImpl;
+
+
+
+import AbstractDao.abstractDao;
+import dao.SkillInterface;
+import entity.Skill;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +15,7 @@ public class SkillDaoImpl extends abstractDao implements SkillInterface {
         int id = res.getInt("id");
         String skillName = res.getString("skill_name");
 
-        return new Skill(id,skillName);
+        return new Skill(id, skillName);
     }
 
     @Override
@@ -19,7 +23,7 @@ public class SkillDaoImpl extends abstractDao implements SkillInterface {
         List<Skill> list = new ArrayList<>();
         try (Connection a = connect()) {
             PreparedStatement st = a.prepareStatement("select * from skill where id=?");
-            st.setInt(1,skill_id);
+            st.setInt(1, skill_id);
             st.execute();
             ResultSet result = st.getResultSet();
 
@@ -33,7 +37,7 @@ public class SkillDaoImpl extends abstractDao implements SkillInterface {
         return list;
     }
 
-    public List<Skill> getAllSkills(){
+    public List<Skill> getAllSkills() {
         List<Skill> list = new ArrayList<>();
         try (Connection a = connect()) {
             Statement st = a.createStatement();
@@ -52,16 +56,16 @@ public class SkillDaoImpl extends abstractDao implements SkillInterface {
 
     @Override
     public boolean insertSkill(Skill skill) {
-        try(Connection a = connect()){
+        try (Connection a = connect()) {
             PreparedStatement st = a.prepareStatement("insert into skill(skill_name) values (?)", Statement.RETURN_GENERATED_KEYS);
-                    st.setString(1,skill.getName());
+            st.setString(1, skill.getName());
             st.execute();
 
             ResultSet keys = st.getGeneratedKeys();
-            if(keys.next()){
+            if (keys.next()) {
                 skill.setId(keys.getInt(1));
             }
-        } catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;

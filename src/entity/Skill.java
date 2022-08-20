@@ -1,4 +1,4 @@
-package SQL_Database.entity;
+package entity;
 
 public class Skill {
     private int id;

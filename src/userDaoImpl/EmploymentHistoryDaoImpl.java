@@ -1,8 +1,11 @@
-package SQL_Database.userDaoImpl;
-import SQL_Database.AbstractDao.abstractDao;
-import SQL_Database.dao.EmploymentHistoryInterface;
-import SQL_Database.entity.EmploymentHistory;
-import SQL_Database.entity.User;
+package userDaoImpl;
+
+
+import AbstractDao.abstractDao;
+import dao.EmploymentHistoryInterface;
+import entity.EmploymentHistory;
+import entity.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ public class EmploymentHistoryDaoImpl extends abstractDao implements EmploymentH
         int userId = res.getInt("user_id");
         String jobDescription = res.getString("job_Description");
 
-        EmploymentHistory emp_history = new EmploymentHistory(id,header,beginDate,endDate,jobDescription,new User(userId));
+        EmploymentHistory emp_history = new EmploymentHistory(id, header, beginDate, endDate, jobDescription, new User(userId));
         return emp_history;
     }
 
@@ -25,7 +28,7 @@ public class EmploymentHistoryDaoImpl extends abstractDao implements EmploymentH
         List<EmploymentHistory> list = new ArrayList<>();
         try (Connection a = connect()) {
             PreparedStatement st = a.prepareStatement("select * from employment_history where id = ?");
-            st.setInt(1,userId);
+            st.setInt(1, userId);
             st.execute();
             ResultSet result = st.getResultSet();
 

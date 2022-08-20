@@ -1,7 +1,10 @@
-package SQL_Database.userDaoImpl;
-import SQL_Database.AbstractDao.abstractDao;
-import SQL_Database.dao.CountryInterface;
-import SQL_Database.entity.Country;
+package userDaoImpl;
+
+
+import AbstractDao.abstractDao;
+import dao.CountryInterface;
+import entity.Country;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package SQL_Database.entity;
+package entity;
 import java.sql.Date;
 import java.util.List;
 
@@ -13,13 +13,14 @@ public class User {
     private Date birthDate;
     private Nationality nationality;
     private Country birthPlace;
-    private List<UserSkill> skills;
+    private List<entity.UserSkill> skills;
     private String header;
     private Date begin_date;
     private Date end_date;
     private String job_description;
+    private Integer password;
 
-    public User(int id, String name, String surname, String phone, String email, String profileDescription, String address, Date birthDate, Nationality nationality, Country birthPlace, String header, Date begin_date, Date end_date, String job_description) {
+    public User(int id, String name, String surname, String phone, String email, String profileDescription, String address, Date birthDate, Nationality nationality, Country birthPlace, String header, Date begin_date, Date end_date, String job_description,Integer password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -34,6 +35,15 @@ public class User {
         this.begin_date = begin_date;
         this.end_date = end_date;
         this.job_description = job_description;
+        this.password=password;
+    }
+
+    public Integer getPassword() {
+        return password;
+    }
+
+    public void setPassword(Integer password) {
+        this.password = password;
     }
 
     public String getHeader() {
@@ -132,11 +142,11 @@ public class User {
         this.birthPlace = birthPlace;
     }
 
-    public List<UserSkill> getSkills() {
+    public List<entity.UserSkill> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<UserSkill> skills) {
+    public void setSkills(List<entity.UserSkill> skills) {
         this.skills = skills;
     }
 

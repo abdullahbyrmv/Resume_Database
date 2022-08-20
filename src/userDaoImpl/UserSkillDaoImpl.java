@@ -1,9 +1,11 @@
-package SQL_Database.userDaoImpl;
-import SQL_Database.AbstractDao.abstractDao;
-import SQL_Database.dao.UserSkillInterface;
-import SQL_Database.entity.Skill;
-import SQL_Database.entity.User;
-import SQL_Database.entity.UserSkill;
+package userDaoImpl;
+
+import AbstractDao.abstractDao;
+import dao.UserSkillInterface;
+import entity.Skill;
+import entity.User;
+import entity.UserSkill;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

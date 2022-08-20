@@ -1,29 +1,30 @@
-package Resume_Desktop_App.Desktop_App;
+package Main;
 
-import Resume_Desktop_App.JDBC.userDaoImpl.*;
+
+import userDaoImpl.CountryDaoImpl;
 
 public class Context {
     public static CountryDaoImpl instanceCountryDao() {
         return new CountryDaoImpl();
     }
 
-    public static EmploymentHistoryDaoImpl instanceEmploymentHistoryDao() {
-        return new EmploymentHistoryDaoImpl();
+    public static userDaoImpl.EmploymentHistoryDaoImpl instanceEmploymentHistoryDao() {
+        return new userDaoImpl.EmploymentHistoryDaoImpl();
     }
 
-    public static SkillDaoImpl instanceSkillDao() {
-        return new SkillDaoImpl();
+    public static userDaoImpl.SkillDaoImpl instanceSkillDao() {
+        return new userDaoImpl.SkillDaoImpl();
     }
 
-    public static UserDaoImpl instanceUserDao() {
-        return new UserDaoImpl();
+    public static userDaoImpl.UserDaoImpl instanceUserDao() {
+        return new userDaoImpl.UserDaoImpl();
     }
 
-    public static UserSkillDaoImpl instanceUserSkillDao() {
-        return new UserSkillDaoImpl();
+    public static userDaoImpl.UserSkillDaoImpl instanceUserSkillDao() {
+        return new userDaoImpl.UserSkillDaoImpl();
     }
 
-    public static NationalityDaoImpl instanceNationalityDao() {
-        return new NationalityDaoImpl();
+    public static userDaoImpl.NationalityDaoImpl instanceNationalityDao() {
+        return new userDaoImpl.NationalityDaoImpl();
     }
 }
