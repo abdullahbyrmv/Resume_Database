@@ -1,8 +1,7 @@
 package SQL_Database.userDaoImpl;
-import AbstractDao.abstractDao;
-import dao.CountryInterface;
-import entity.Country;
-
+import SQL_Database.AbstractDao.abstractDao;
+import SQL_Database.dao.CountryInterface;
+import SQL_Database.entity.Country;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ public class CountryDaoImpl extends abstractDao implements CountryInterface {
     private Country getCountry(ResultSet res) throws SQLException {
         int countryId = res.getInt("id");
         String countryName = res.getString("name");
-        return new Country(countryId,countryName);
+        return new Country(countryId,countryName,null);
     }
 
     @Override

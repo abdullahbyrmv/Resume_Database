@@ -1,20 +1,18 @@
 package SQL_Database.entity;
+import java.util.Objects;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "country", schema = "resume", catalog = "")
 public class Country {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id")
     private int id;
-    @Basic
-    @Column(name = "name")
     private String name;
+    private String nationality;
 
     public Country() {
+    }
 
+    public Country(int id, String name, String nationality) {
+        this.id = id;
+        this.name = name;
+        this.nationality = nationality;
     }
 
     public int getId() {
@@ -33,28 +31,29 @@ public class Country {
         this.name = name;
     }
 
-    public Country(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Country that = (Country) o;
-
-        if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+        Country country = (Country) o;
+        return id == country.id;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -1,21 +1,9 @@
 package SQL_Database.entity;
+import java.util.Objects;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "nationality", schema = "resume", catalog = "")
 public class Nationality {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id")
     private int id;
-    @Basic
-    @Column(name = "nationality_name")
-    private String nationalityName;
-
-    public Nationality() {
-
-    }
+    private String nationality_name;
 
     public int getId() {
         return id;
@@ -25,37 +13,34 @@ public class Nationality {
         this.id = id;
     }
 
-    public String getNationalityName() {
-        return nationalityName;
+    public String getNationality_name() {
+        return nationality_name;
     }
 
-    public void setNationalityName(String nationalityName) {
-        this.nationalityName = nationalityName;
+    public void setNationality_name(String nationality_name) {
+        this.nationality_name = nationality_name;
     }
 
-    public Nationality(int id, String nationalityName) {
+    public Nationality(int id, String nationality_name) {
         this.id = id;
-        this.nationalityName = nationalityName;
+        this.nationality_name = nationality_name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Nationality that = (Nationality) o;
-
-        if (id != that.id) return false;
-        if (nationalityName != null ? !nationalityName.equals(that.nationalityName) : that.nationalityName != null)
-            return false;
-
-        return true;
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (nationalityName != null ? nationalityName.hashCode() : 0);
-        return result;
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return nationality_name;
     }
 }

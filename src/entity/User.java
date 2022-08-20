@@ -1,82 +1,72 @@
 package SQL_Database.entity;
-
-import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
-@Entity
-@Table(name = "user", schema = "resume", catalog = "")
 public class User {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id")
     private int id;
-    @Basic
-    @Column(name = "name")
     private String name;
-    @Basic
-    @Column(name = "surname")
     private String surname;
-    @Basic
-    @Column(name = "email")
-    private String email;
-    @Basic
-    @Column(name = "phone")
     private String phone;
-    @Basic
-    @Column(name = "profile_description")
+    private String email;
     private String profileDescription;
-    @Basic
-    @Column(name = "address")
     private String address;
-    @Basic
-    @Column(name = "birthdate")
-    private Date birthdate;
-    @Basic
-    @Column(name = "birthplace_id")
-    private Integer birthplaceId;
-    @Basic
-    @Column(name = "nationality_id")
-    private Integer nationalityId;
-    @Basic
-    @Column(name = "old_company_name")
-    private String oldCompanyName;
-    @Basic
-    @Column(name = "begin_date")
-    private Date beginDate;
-    @Basic
-    @Column(name = "end_date")
-    private Date endDate;
-    @Basic
-    @Column(name = "job_description")
-    private String jobDescription;
-    @Basic
-    @Column(name = "employment_id")
-    private Integer employmentId;
-    @Basic
-    @Column(name = "password")
-    private String password;
+    private Date birthDate;
+    private Nationality nationality;
+    private Country birthPlace;
+    private List<UserSkill> skills;
+    private String header;
+    private Date begin_date;
+    private Date end_date;
+    private String job_description;
 
-    public User() {
-
-    }
-
-    public User(int id, String name, String surname, String phone, String email, String profileDescription, String address, Date birthdate, Nationality nationality, Country birthplace, String header, Date begin_date, Date end_date, String description) {
+    public User(int id, String name, String surname, String phone, String email, String profileDescription, String address, Date birthDate, Nationality nationality, Country birthPlace, String header, Date begin_date, Date end_date, String job_description) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.email = email;
         this.phone = phone;
+        this.email = email;
         this.profileDescription = profileDescription;
         this.address = address;
-        this.birthdate = birthdate;
-        this.birthplaceId = birthplaceId;
-        this.nationalityId = nationalityId;
-        this.oldCompanyName = oldCompanyName;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.jobDescription = jobDescription;
+        this.birthDate = birthDate;
+        this.nationality = nationality;
+        this.birthPlace = birthPlace;
+        this.header = header;
+        this.begin_date = begin_date;
+        this.end_date = end_date;
+        this.job_description = job_description;
     }
 
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public Date getBegin_date() {
+        return begin_date;
+    }
+
+    public void setBegin_date(Date begin_date) {
+        this.begin_date = begin_date;
+    }
+
+    public Date getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
+    }
+
+    public String getJob_description() {
+        return job_description;
+    }
+
+    public void setJob_description(String job_description) {
+        this.job_description = job_description;
+    }
 
     public int getId() {
         return id;
@@ -102,6 +92,14 @@ public class User {
         this.surname = surname;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -110,12 +108,36 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Nationality getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(Nationality nationality) {
+        this.nationality = nationality;
+    }
+
+    public Country getBirthPlace() {
+        return birthPlace;
+    }
+
+    public void setBirthPlace(Country birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
+    public List<UserSkill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<UserSkill> skills) {
+        this.skills = skills;
     }
 
     public String getProfileDescription() {
@@ -134,144 +156,24 @@ public class User {
         this.address = address;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", profileDescription='" + profileDescription + '\'' +
+                ", address='" + address + '\'' +
+                ", birthDate=" + birthDate +
+                ", nationality=" + nationality +
+                ", birthPlace=" + birthPlace +
+                ", skills=" + skills +
+                '}';
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public Integer getBirthplaceId() {
-        return birthplaceId;
-    }
-
-    public void setBirthplaceId(Integer birthplaceId) {
-        this.birthplaceId = birthplaceId;
-    }
-
-    public Integer getNationalityId() {
-        return nationalityId;
-    }
-
-    public void setNationalityId(Integer nationalityId) {
-        this.nationalityId = nationalityId;
-    }
-
-    public String getOldCompanyName() {
-        return oldCompanyName;
-    }
-
-    public void setOldCompanyName(String oldCompanyName) {
-        this.oldCompanyName = oldCompanyName;
-    }
-
-    public Date getBeginDate() {
-        return beginDate;
-    }
-
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getJobDescription() {
-        return jobDescription;
-    }
-
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
-    }
-
-    public Integer getEmploymentId() {
-        return employmentId;
-    }
-
-    public void setEmploymentId(Integer employmentId) {
-        this.employmentId = employmentId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User(int id, String name, String surname, String email, String phone, String profileDescription, String address, Date birthdate, Integer birthplaceId, Integer nationalityId, String oldCompanyName, Date beginDate, Date endDate, String jobDescription) {
+    public User(int id) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phone = phone;
-        this.profileDescription = profileDescription;
-        this.address = address;
-        this.birthdate = birthdate;
-        this.birthplaceId = birthplaceId;
-        this.nationalityId = nationalityId;
-        this.oldCompanyName = oldCompanyName;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.jobDescription = jobDescription;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User that = (User) o;
-
-        if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
-        if (profileDescription != null ? !profileDescription.equals(that.profileDescription) : that.profileDescription != null)
-            return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (birthdate != null ? !birthdate.equals(that.birthdate) : that.birthdate != null) return false;
-        if (birthplaceId != null ? !birthplaceId.equals(that.birthplaceId) : that.birthplaceId != null) return false;
-        if (nationalityId != null ? !nationalityId.equals(that.nationalityId) : that.nationalityId != null)
-            return false;
-        if (oldCompanyName != null ? !oldCompanyName.equals(that.oldCompanyName) : that.oldCompanyName != null)
-            return false;
-        if (beginDate != null ? !beginDate.equals(that.beginDate) : that.beginDate != null) return false;
-        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
-        if (jobDescription != null ? !jobDescription.equals(that.jobDescription) : that.jobDescription != null)
-            return false;
-        if (employmentId != null ? !employmentId.equals(that.employmentId) : that.employmentId != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (profileDescription != null ? profileDescription.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (birthdate != null ? birthdate.hashCode() : 0);
-        result = 31 * result + (birthplaceId != null ? birthplaceId.hashCode() : 0);
-        result = 31 * result + (nationalityId != null ? nationalityId.hashCode() : 0);
-        result = 31 * result + (oldCompanyName != null ? oldCompanyName.hashCode() : 0);
-        result = 31 * result + (beginDate != null ? beginDate.hashCode() : 0);
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + (jobDescription != null ? jobDescription.hashCode() : 0);
-        result = 31 * result + (employmentId != null ? employmentId.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        return result;
     }
 }

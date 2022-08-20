@@ -1,6 +1,5 @@
 package SQL_Database.dao;
-import entity.Country;
-
+import SQL_Database.entity.Country;
 import java.util.List;
 
 public interface CountryInterface {

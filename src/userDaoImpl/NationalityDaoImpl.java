@@ -1,8 +1,7 @@
 package SQL_Database.userDaoImpl;
-import AbstractDao.abstractDao;
-import dao.NationalityInterface;
-import entity.Nationality;
-
+import SQL_Database.AbstractDao.abstractDao;
+import SQL_Database.dao.NationalityInterface;
+import SQL_Database.entity.Nationality;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

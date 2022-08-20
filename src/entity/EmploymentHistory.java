@@ -1,118 +1,84 @@
 package SQL_Database.entity;
-
-import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
-@Table(name = "employment_history", schema = "resume", catalog = "")
 public class EmploymentHistory {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id")
-    private int id;
-    @Basic
-    @Column(name = "company")
-    private String company;
-    @Basic
-    @Column(name = "begin_date")
-    private Date beginDate;
-    @Basic
-    @Column(name = "end_date")
-    private Date endDate;
-    @Basic
-    @Column(name = "job_Description")
-    private String jobDescription;
-    @Basic
-    @Column(name = "user_id")
-    private Integer userId;
+    private Integer id;
+    private String header;
+    private Date begin_date;
+    private Date end_date;
+    private String job_description;
+    private User user;
 
-    public EmploymentHistory() {
-
+    public EmploymentHistory(Integer id, String header, Date begin_date, Date end_date, String job_description, User user) {
+        this.id = id;
+        this.header = header;
+        this.begin_date = begin_date;
+        this.end_date = end_date;
+        this.job_description = job_description;
+        this.user = user;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getCompany() {
-        return company;
+    public String getHeader() {
+        return header;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setHeader(String header) {
+        this.header = header;
     }
 
-    public Date getBeginDate() {
-        return beginDate;
+    public Date getBegin_date() {
+        return begin_date;
     }
 
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
+    public void setBegin_date(Date begin_date) {
+        this.begin_date = begin_date;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getEnd_date() {
+        return end_date;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
     }
 
-    public String getJobDescription() {
-        return jobDescription;
+    public String getJob_description() {
+        return job_description;
     }
 
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
+    public void setJob_description(String job_description) {
+        this.job_description = job_description;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public EmploymentHistory(int id, String company, Date beginDate, Date endDate, String jobDescription, Integer userId) {
-        this.id = id;
-        this.company = company;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.jobDescription = jobDescription;
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EmploymentHistory that = (EmploymentHistory) o;
-
-        if (id != that.id) return false;
-        if (company != null ? !company.equals(that.company) : that.company != null) return false;
-        if (beginDate != null ? !beginDate.equals(that.beginDate) : that.beginDate != null) return false;
-        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
-        if (jobDescription != null ? !jobDescription.equals(that.jobDescription) : that.jobDescription != null)
-            return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-
-        return true;
+    public String toString() {
+        return "EmploymentHistory{" +
+                "id=" + id +
+                ", header='" + header + '\'' +
+                ", begin_date=" + begin_date +
+                ", end_date=" + end_date +
+                ", job_description='" + job_description + '\'' +
+                ", user=" + user +
+                '}';
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (company != null ? company.hashCode() : 0);
-        result = 31 * result + (beginDate != null ? beginDate.hashCode() : 0);
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + (jobDescription != null ? jobDescription.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        return result;
+    public EmploymentHistory() {
+
     }
 }

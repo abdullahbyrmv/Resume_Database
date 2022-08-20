@@ -1,6 +1,5 @@
 package SQL_Database.dao;
-import entity.EmploymentHistory;
-
+import SQL_Database.entity.EmploymentHistory;
 import java.util.List;
 
 public interface EmploymentHistoryInterface {

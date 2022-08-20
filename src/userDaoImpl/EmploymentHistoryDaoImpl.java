@@ -1,9 +1,8 @@
 package SQL_Database.userDaoImpl;
-
-import AbstractDao.abstractDao;
-import dao.EmploymentHistoryInterface;
-import entity.EmploymentHistory;
-
+import SQL_Database.AbstractDao.abstractDao;
+import SQL_Database.dao.EmploymentHistoryInterface;
+import SQL_Database.entity.EmploymentHistory;
+import SQL_Database.entity.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class EmploymentHistoryDaoImpl extends abstractDao implements EmploymentH
         int userId = res.getInt("user_id");
         String jobDescription = res.getString("job_Description");
 
-        EmploymentHistory emp_history = new EmploymentHistory(id,header,beginDate,endDate,jobDescription,userId);
+        EmploymentHistory emp_history = new EmploymentHistory(id,header,beginDate,endDate,jobDescription,new User(userId));
         return emp_history;
     }
 

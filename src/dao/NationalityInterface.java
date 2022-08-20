@@ -1,6 +1,5 @@
 package SQL_Database.dao;
-import entity.Nationality;
-
+import SQL_Database.entity.Nationality;
 import java.util.List;
 
 public interface NationalityInterface {

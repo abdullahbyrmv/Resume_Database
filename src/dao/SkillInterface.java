@@ -1,6 +1,5 @@
 package SQL_Database.dao;
-import entity.Skill;
-
+import SQL_Database.entity.Skill;
 import java.util.List;
 
 public interface SkillInterface {

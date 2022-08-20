@@ -1,6 +1,5 @@
 package SQL_Database.dao;
-import entity.User;
-
+import SQL_Database.entity.User;
 import java.sql.SQLException;
 import java.util.List;
 

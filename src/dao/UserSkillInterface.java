@@ -1,6 +1,5 @@
 package SQL_Database.dao;
-import entity.UserSkill;
-
+import SQL_Database.entity.UserSkill;
 import java.util.List;
 
 public interface UserSkillInterface {

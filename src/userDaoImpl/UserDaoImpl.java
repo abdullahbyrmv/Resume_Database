@@ -1,45 +1,37 @@
 package SQL_Database.userDaoImpl;
-
-import AbstractDao.abstractDao;
-import dao.UserInterface;
-import entity.User;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import SQL_Database.AbstractDao.abstractDao;
+import SQL_Database.dao.UserInterface;
+import SQL_Database.entity.Country;
+import SQL_Database.entity.Nationality;
+import SQL_Database.entity.User;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl extends abstractDao implements UserInterface {
+    private User getUser(ResultSet result) throws SQLException {
+        int id = result.getInt("id");
+        String name = result.getString("name");
+        String surname = result.getString("surname");
+        String phone = result.getString("phone");
+        String email = result.getString("email");
+        String profileDescription = result.getString("profile_description");
+        String address = result.getString("address");
+        int nationality_id = result.getInt("nationality_id");
+        int birthPlace_id = result.getInt("birthplace_id");
+        String nationalityStr = result.getString("nationality_name");
+        String birthPlaceStr = result.getString("birthplace");
+        Date birthdate = result.getDate("birthdate");
+        String header = result.getString("old_company_name");
+        Date begin_date = result.getDate("begin_date");
+        Date end_date = result.getDate("end_date");
+        String Description = result.getString("job_description");
 
-    EntityManager em;
-//    private User getUser(ResultSet result) throws SQLException {
-//        int id = result.getInt("id");
-//        String name = result.getString("name");
-//        String surname = result.getString("surname");
-//        String phone = result.getString("phone");
-//        String email = result.getString("email");
-//        String profileDescription = result.getString("profile_description");
-//        String address = result.getString("address");
-//        int nationality_id = result.getInt("nationality_id");
-//        int birthPlace_id = result.getInt("birthplace_id");
-//        String nationalityStr = result.getString("nationality_name");
-//        String birthPlaceStr = result.getString("birthplace");
-//        Date birthdate = result.getDate("birthdate");
-//        String header = result.getString("old_company_name");
-//        Date begin_date = result.getDate("begin_date");
-//        Date end_date = result.getDate("end_date");
-//        String Description = result.getString("job_description");
-//
-//        Nationality nationality = new Nationality(nationality_id,nationalityStr);
-//        Country birthplace = new Country(birthPlace_id,birthPlaceStr);
-//
-//        return new User(id, name, surname, phone, email, profileDescription, address, birthdate, nationality, birthplace,header,begin_date,end_date,Description);
-//    }
+        Nationality nationality = new Nationality(nationality_id,nationalityStr);
+        Country birthplace = new Country(birthPlace_id,birthPlaceStr,null);
+
+        return new User(id, name, surname, phone, email, profileDescription, address, birthdate, nationality, birthplace,header,begin_date,end_date,Description);
+    }
 
     @Override
     public List<User> getAllInfo() {
@@ -56,8 +48,8 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
             ResultSet result = st.getResultSet();
 
             while (result.next()) {
-//                User u = getUser(result);
-//                list.add(u);
+                User u = getUser(result);
+                list.add(u);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -75,13 +67,14 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
             st.setString(4,u.getEmail());
             st.setString(5,u.getProfileDescription());
             st.setString(6,u.getAddress());
-            st.setDate(7,u.getBirthdate());
-            st.setInt(8,u.getBirthplaceId());
-            st.setInt(9,u.getNationalityId());
-            st.setDate(10,u.getBeginDate());
-            st.setDate(11,u.getEndDate());
-            st.setString(12,u.getJobDescription());
-            st.setInt(13,u.getId());
+            st.setDate(7,u.getBirthDate());
+            st.setInt(8,u.getBirthPlace().getId());
+            st.setInt(9,u.getNationality().getId());
+            st.setString(10,u.getHeader());
+            st.setDate(11,u.getBegin_date());
+            st.setDate(12,u.getEnd_date());
+            st.setString(13,u.getJob_description());
+            st.setInt(14,u.getId());
             return st.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -102,10 +95,24 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
     }
 
     public User getByID(int userId) {
-        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("resumeAppPU");
-        EntityManager em = emfactory.createEntityManager();
-        User u = em.find(User.class,userId);
-        return u;
+        User res = null;
+        try (Connection a = connect()) {
+            Statement st = a.createStatement();
+            st.execute("select " +
+                    "   u.*, " +
+                    "   n.nationality_name, " +
+                    "   c.name as birthplace " +
+                    "   from user u " +
+                    "   left join nationality n on u.nationality_id = n.id "+
+                    "   left join country c on u.birthplace_id = c.id where u.id = " + userId);
+            ResultSet result = st.getResultSet();
+            while (result.next()) {
+                res = getUser(result);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return res;
     }
 
     public boolean addUser(User u) {
@@ -117,7 +124,7 @@ public class UserDaoImpl extends abstractDao implements UserInterface {
             st.setString(4,u.getEmail());
             st.setString(5,u.getProfileDescription());
             st.setString(6,u.getAddress());
-            st.setDate(7,u.getBirthdate());
+            st.setDate(7,u.getBirthDate());
             return st.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
