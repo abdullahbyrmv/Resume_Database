@@ -1,7 +1,8 @@
-package userDaoImpl;
+package SQL_Database.userDaoImpl;
 import AbstractDao.abstractDao;
 import dao.SkillInterface;
-import entitiy.Skill;
+import entity.Skill;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +49,22 @@ public class SkillDaoImpl extends abstractDao implements SkillInterface {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public boolean insertSkill(Skill skill) {
+        try(Connection a = connect()){
+            PreparedStatement st = a.prepareStatement("insert into skill(skill_name) values (?)", Statement.RETURN_GENERATED_KEYS);
+                    st.setString(1,skill.getSkillName());
+            st.execute();
+
+            ResultSet keys = st.getGeneratedKeys();
+            if(keys.next()){
+                skill.setId(keys.getInt(1));
+            }
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

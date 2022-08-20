@@ -1,7 +1,8 @@
-package dao;
-import entitiy.EmploymentHistory;
+package SQL_Database.dao;
+import entity.EmploymentHistory;
+
 import java.util.List;
 
 public interface EmploymentHistoryInterface {
-    public List<EmploymentHistory> getAllEmploymentHistoryByUserId(int userId);
+    public List<EmploymentHistory> getAllEmploymentHistory(int id);
 }

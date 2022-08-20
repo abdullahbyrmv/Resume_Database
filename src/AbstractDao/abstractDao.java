@@ -1,14 +1,15 @@
-package AbstractDao;
+package SQL_Database.AbstractDao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public abstract class abstractDao {
-    public static Connection connect() throws SQLException {
+    public static Connection connect() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
         String url = "jdbc:mysql://localhost:3306/resume";
         String username = "root";// your database name
-        String password = "**********";// your database password
-        Connection c = DriverManager.getConnection(url,username,password);
+        String password = "legendonline1";// your database password
+        Connection c = DriverManager.getConnection(url, username, password);
         return c;
     }
 }
